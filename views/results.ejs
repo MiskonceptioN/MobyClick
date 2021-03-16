@@ -1,0 +1,33 @@
+<%- include('header'); %>
+	<% if (message) { %>
+	<div id="message" role="alert" class="alert alert-<%= message.status %>"><%= message.content %></div>
+	<% } %>
+    <section id="index" class="text-center">
+        <header>
+            <h1><%= gamesFound.length %> results for "Search Term"</h1>
+        </header>
+		<section>
+			<% if (gamesFound.length > 0) { %>
+				<% gamesFound.forEach(function(game) { %>
+					<article class="card" style="width: 18rem;">
+						<img src="<%= game.coverArt.thumbnail_image %>" class="card-img-top" alt="<%= game.title %> cover art">
+						<div class="card-body">
+							<h5 class="card-title"><%= game.title %></h5>
+							<p class="card-text"><%- game.description %></p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<% game.screenshots.forEach(function(screenshot) { %>
+								<li class="list-group-item"><img src="<%= screenshot.thumbnail_image %>" alt="<%= screenshot.caption %>"></li>
+							<% }); %>
+						</ul>
+					</article>
+				<% }); %>
+			<% } else { %>
+				<h2>No games found. You fucking suck.</h2>
+			<% } %>
+		</section>
+        <footer style="margin-top: 10em;">
+            <h6>Made by <a href="https://www.twitch.tv/dannyvalz" target="_blank">dannyvalz <img width="16" height="16" src="https://twitch.tv/favicon.ico"></a></h6>
+        </footer>
+    </section>
+<%- include('footer'); %>

@@ -1,14 +1,16 @@
 <%- include('header'); %>
+	<% if (message) { %>
+	<div id="message" role="alert" class="alert alert-<%= message.status %>"><%= message.content %></div>
+	<% } %>
     <section id="index" class="text-center">
         <header>
-            <h1>Some header</h1>
+            <h1>Game search</h1>
         </header>
 		<section>
-			<%- include('forms/example'); %>
+			<%- include('forms/gameSearch'); %>
 		</section>
         <footer style="margin-top: 10em;">
-            <h6>Made by <a href="https://www.twitch.tv/dannyvalz" target="_blank">Danny Valentine <img width="16" height="16" src="https://twitch.tv/favicon.ico"></a></h6>
+            <h6>Made by <a href="https://www.twitch.tv/dannyvalz" target="_blank">dannyvalz <img width="16" height="16" src="https://twitch.tv/favicon.ico"></a></h6>
         </footer>
     </section>
-	<script src="js/ajaxFormHandler.js"></script>
 <%- include('footer'); %>

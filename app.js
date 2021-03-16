@@ -19,7 +19,70 @@ app.use(express.static("public"));
 // Routes
 app.route("/")
 	.get(function(req, res){
-		res.render("index");
+		res.render("index", {message: ""});
+	})
+	.post(function(req, res){
+		if (req.body.title === "") {
+			res.render("index", {message: {status: "danger", content: abortMessage}});
+		} else {
+			const gameInfo = [];
+			const errorsFound = [];
+
+			axios.get(mobyURL + req.body.title)
+			.then(function (response) {
+				response.data.games.forEach(function(game){
+					// console.log(game);
+					if (!game.sample_cover) {game.sample_cover = {
+						height: 300,
+						width: 212,
+						platforms: [ 'Windows' ],
+						image: "https://via.placeholder.com/212x300",
+						thumbnail_image: "https://via.placeholder.com/212x300",
+						};
+					}
+
+					if (game.sample_screenshots.length === 0) {
+						game.sample_screenshots = [{
+							height: 300,
+							width: 212,
+							caption: "No screenshots",
+							image: "https://via.placeholder.com/212x300",
+							thumbnail_image: "https://via.placeholder.com/212x300",
+						}];
+					}
+					// console.log("Screenshots for " + game.title);
+					console.log(game.sample_screenshots.length);
+					gameInfo.push({
+						title: game.title,
+						description: game.description,
+						// genres: game.genres,
+						// platforms: game.platforms,
+						coverArt: game.sample_cover,
+						screenshots: game.sample_screenshots
+					});
+				});
+			})
+			.catch(function (error) {
+				// handle error
+				console.log("=========");
+				console.log("ERROR - Could not communicate with MobyGames API");
+				console.log("=========");
+				if (error.response) {
+					console.log(error.response.data);
+					errorsFound.push("Error " + error.response.data.code + " (" + error.response.data.error + ") " + error.response.data.message);
+				} else {
+					console.log(error);
+					errorsFound.push(error);
+				}
+			})
+			.then(function(response){
+				if (errorsFound.length > 0) {
+					res.render("index", {message: {status: "danger", content: errorsFound[0]}});
+				} else {
+					res.render("results", {message: {}, gamesFound: gameInfo});
+				}
+			});
+		};
 	});
 
 app.route("/exampleAjaxPOST")
