@@ -3,6 +3,11 @@
 	<div id="message" role="alert" class="alert alert-<%= message.status %>"><%= message.content %></div>
 	<% } %>
     <section id="index" class="text-center">
+		<code>
+			<pre>
+				<%= JSON.stringify(gamesFound); %>
+			</pre>
+		</code>
         <header>
             <h1><%= gamesFound.length %> results for "Search Term"</h1>
         </header>
