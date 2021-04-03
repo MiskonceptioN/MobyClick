@@ -24,7 +24,7 @@ app.route("/")
 	})
 	.post(function(req, res){
 		if (req.body.title === "") {
-			res.render("index", {message: {status: "danger", content: abortMessage}});
+			res.render("index", {message: {status: "danger", content: "You must provide a game title. How else do you think this works? WTF?"}});
 		} else {
 			const gameInfo = [];
 			const errorsFound = [];
