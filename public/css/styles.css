@@ -32,3 +32,15 @@
 h1 {
 	margin-bottom: 1.5rem;
 }
+
+#screenshot_gallery img:hover {
+	opacity: .6;
+}
+
+.card {
+	width: 18rem;
+}
+
+#cover_image {
+	width: 100%;
+}

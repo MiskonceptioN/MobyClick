@@ -3,36 +3,68 @@
 	<div id="message" role="alert" class="alert alert-<%= message.status %>"><%= message.content %></div>
 	<% } %>
     <section id="index" class="text-center">
-		<code>
-			<pre>
-				<%= JSON.stringify(gamesFound); %>
-			</pre>
-		</code>
         <header>
-            <h1><%= gamesFound.length %> results for "Search Term"</h1>
+            <h1><%= gamesFound.length %> results for "<%= searchString %>"</h1>
         </header>
+		<section class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div id="cover_image_container">
+						<img id="cover_image" src="https://via.placeholder.com/2120x3000" class="img-fluid" alt="<%= searchString %> cover art"/>
+					</div>
+					<div id="loading_container" class="d-none">
+						<div class="text-center my-5">
+							<div class="spinner-border" role="status"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="title" placeholder="Game title">
+								<label for="title">Game title</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="year" placeholder="Year">
+								<label for="year">Year</label>
+							</div>
+						</div>
+					</div>
+					<div class="mb-3 form-floating">
+						<textarea class="form-control" placeholder="Game description" id="description" style="min-height: 300px"></textarea>
+						<label for="description">Description</label>
+					</div>
+					<div class="mb-3" id="tags">
+						<span class="badge rounded-pill bg-secondary mx-1">&times; Primary</span>
+					</div>
+					<div class="mb-3" id="screenshot_gallery">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<h2>Other possible results</h2>
+			</div>
+			<div class="row" id="other_results">
+				<div class="card">
+					<div class="card-body">
+						<p class="card-text">Game title</p>
+					</div>
+					<img src="https://via.placeholder.com/212x300" alt="" class="card-img-bottom">
+				</div>
+			</div>
+		</section>
 		<section>
 			<% if (gamesFound.length > 0) { %>
-				<% gamesFound.forEach(function(game) { %>
-					<article class="card" style="width: 18rem;">
-						<a href="<%= game.coverArt.image %>"><img src="<%= game.coverArt.thumbnail_image %>" class="card-img-top" alt="<%= game.title %> cover art"></a>
-						<div class="card-body">
-							<h5 class="card-title"><%= game.title %></h5>
-							<p class="card-text"><%- game.description %></p>
-						</div>
-						<ul class="list-group list-group-flush">
-							<% game.screenshots.forEach(function(screenshot) { %>
-								<li class="list-group-item"><img src="<%= screenshot.thumbnail_image %>" alt="<%= screenshot.caption %>"></li>
-							<% }); %>
-						</ul>
-					</article>
-				<% }); %>
 			<% } else { %>
-				<h2>No games found. You fucking suck.</h2>
 			<% } %>
 		</section>
         <footer style="margin-top: 10em;">
             <h6>Made by <a href="https://www.twitch.tv/dannyvalz" target="_blank">dannyvalz <img width="16" height="16" src="https://twitch.tv/favicon.ico"></a></h6>
         </footer>
     </section>
+	<script>const gameJSON = <%- JSON.stringify(gamesFound); %></script>
+	<script src="/js/gallery.js" charset="utf-8"></script>
 <%- include('footer'); %>

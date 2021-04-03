@@ -80,7 +80,7 @@ app.route("/")
 				if (errorsFound.length > 0) {
 					res.render("index", {message: {status: "danger", content: errorsFound[0]}});
 				} else {
-					res.render("results", {message: {}, gamesFound: gameInfo});
+					res.render("results", {message: {}, searchString: req.body.title, gamesFound: gameInfo});
 				}
 			});
 		};
