@@ -41,6 +41,8 @@ app.route("/")
 						};
 					}
 
+					game.sample_screenshots.splice(0, 0, game.sample_cover);
+
 					if (game.sample_screenshots.length === 0) {
 						game.sample_screenshots = [{
 							height: 300,
@@ -51,12 +53,11 @@ app.route("/")
 						}];
 					}
 					// console.log("Screenshots for " + game.title);
-					console.log(game.sample_screenshots.length);
 					gameInfo.push({
 						title: game.title,
 						description: game.description,
-						// genres: game.genres,
-						// platforms: game.platforms,
+						genres: game.genres,
+						platforms: game.platforms,
 						coverArt: game.sample_cover,
 						screenshots: game.sample_screenshots
 					});
@@ -83,6 +84,15 @@ app.route("/")
 				}
 			});
 		};
+	});
+
+app.route("/results")
+	.get(function(req, res){
+		// res.render("index", {message: ""});
+		// const jsonData = fs.readFileSync("blueshift.json");
+
+		// res.render("exampleResults", {message: "", data: JSON.parse(jsonData)});
+		res.render("exampleResults", {message: ""});
 	});
 
 app.route("/exampleAjaxPOST")

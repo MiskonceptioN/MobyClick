@@ -15,7 +15,7 @@
 			<% if (gamesFound.length > 0) { %>
 				<% gamesFound.forEach(function(game) { %>
 					<article class="card" style="width: 18rem;">
-						<img src="<%= game.coverArt.thumbnail_image %>" class="card-img-top" alt="<%= game.title %> cover art">
+						<a href="<%= game.coverArt.image %>"><img src="<%= game.coverArt.thumbnail_image %>" class="card-img-top" alt="<%= game.title %> cover art"></a>
 						<div class="card-body">
 							<h5 class="card-title"><%= game.title %></h5>
 							<p class="card-text"><%- game.description %></p>
