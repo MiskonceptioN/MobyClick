@@ -2,15 +2,15 @@
 	<% if (message) { %>
 	<div id="message" role="alert" class="alert alert-<%= message.status %>"><%= message.content %></div>
 	<% } %>
-    <section id="index" class="text-center">
-        <header>
+    <section id="index">
+        <header class="text-center">
             <h1><%= gamesFound.length %> results for "<%= searchString %>"</h1>
         </header>
 		<section class="container">
 			<div class="row">
 				<div class="col-md-4">
 					<div id="cover_image_container">
-						<img id="cover_image" src="https://via.placeholder.com/2120x3000" class="img-fluid" alt="<%= searchString %> cover art"/>
+						<img id="cover_image" src="/images/missing_cover.png" class="img-fluid" alt="<%= searchString %> cover art"/>
 					</div>
 					<div id="loading_container" class="d-none">
 						<div class="text-center my-5">
@@ -52,7 +52,7 @@
 					<div class="card-body">
 						<p class="card-text">Game title</p>
 					</div>
-					<img src="https://via.placeholder.com/212x300" alt="" class="card-img-bottom">
+					<img src="/images/missing_cover.png" alt="" class="card-img-bottom">
 				</div>
 			</div>
 		</section>
@@ -61,7 +61,7 @@
 			<% } else { %>
 			<% } %>
 		</section>
-        <footer style="margin-top: 10em;">
+        <footer class="text-center my-5">
             <h6>Made by <a href="https://www.twitch.tv/dannyvalz" target="_blank">dannyvalz <img width="16" height="16" src="https://twitch.tv/favicon.ico"></a></h6>
         </footer>
     </section>
