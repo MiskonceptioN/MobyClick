@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios").default;
 const fs = require("fs");
+const {stripHtml} = require("string-strip-html");
 
 const app = express();
 const apiKey = process.env.API_KEY;
@@ -55,7 +56,7 @@ app.route("/")
 					// console.log("Screenshots for " + game.title);
 					gameInfo.push({
 						title: game.title,
-						description: game.description,
+						description: stripHtml(game.description).result,
 						genres: game.genres,
 						platforms: game.platforms,
 						coverArt: game.sample_cover,
